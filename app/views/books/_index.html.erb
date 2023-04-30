@@ -22,14 +22,14 @@
         ♥<%= book.favorites.count %> いいね
       <% end %>
     </td>
-     <td><%=  "#{@book.post_comments.count} コメント"%></td>
+     <td><%=  "#{book.book_comments.count} コメント"%></td>
     <% else %>
     <td>
       <%= link_to book_favorites_path(book), method: :post do %>
         ♡<%= book.favorites.count %> いいね
       <% end %>
     </td>
-     <td><%="#{@book.post_comments.count} コメント"%></td>
+     <td><%="#{book.book_comments.count} コメント"%></td>
   <% end %>
       </tr>
     <% end %>

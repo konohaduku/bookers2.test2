@@ -15,23 +15,21 @@
             <%= link_to @book.title, @book %>
             <%= @book.body %>
             <% if @book.favorited_by?(current_user) %>
-    
+
             <%= link_to book_favorites_path(@book), method: :delete do %>
               ♥<%= @book.favorites.count %> いいね
             <% end %><br>
             <%= @book.user.name %>
              <% else %>
-    
+
             <%= link_to book_favorites_path(@book), method: :post do %>
               ♡<%= @book.favorites.count %> いいね
             <% end %><br>
             <%= @book.user.name %>
             <% end %>
+            <% end %>
           </td>
-          
-        <% end %>
-  <td><%=  "#{@book.post_comments.count} コメント"%></td>
-          
+          </tr>
             <% if @book.user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
             <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
@@ -39,37 +37,36 @@
 <div>
   <tr>
   <td>
-  <%= form_with model: [@book, @post_comment] do |f| %>
+  コメント件数：<%= @book.book_comments.count %>
+  </td>
+  </tr>
+
+  <tr>
+  <td>
+    <% @book.book_comments.each do |book_comment| %>
+    <%= image_tag book_comment.user.get_profile_image, class: "rounded-circle", size:"50x50" %>
+    <%= book_comment.comment %>
+    <% if book_comment.user == current_user %>
+    <%= link_to "削除", book_book_comment_path(book_comment.book, book_comment), method: :delete %>
+     <% end %><br>
+    <%= book_comment.user.name %><br>
+    <% end %>
+    </td>
+  </tr>
+   <tr>
+  <td>
+  <%= form_with model: [@book, @book_comment] do |f| %>
     <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", size: "50" %>
   </td>
   <td><%= f.submit "送信する" %></td>
   <% end %>
-  
-  </tr>
- 
-  <tr>
-  <td>
-  コメント件数：<%= @book.post_comments.count %>
-  </td>
-  </tr>
-  
-  <tr>
-  <td>
-    <% @book.post_comments.each do |post_comment| %>
-    <%= image_tag post_comment.user.get_profile_image, class: "rounded-circle", size:"50x50" %>
-    <%= post_comment.comment %>
-    <% if post_comment.user == current_user %>
-    <%= link_to "削除", book_post_comment_path(post_comment.book, post_comment), method: :delete %>
-     <% end %><br>
-    <%= post_comment.user.name %><br>
-    <% end %>
-    </td>
+
   </tr>
 </div>
-  
-  
-</tr>
+
       </table>
+
+
     </div>
   </div>
 </div>
