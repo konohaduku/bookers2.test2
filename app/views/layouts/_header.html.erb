@@ -10,22 +10,22 @@
         <% if user_signed_in? %>
           <li>
             <%= link_to user_path(current_user),class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> home
+              <i class="fa-solid fa-home"> home</i> 
             <% end %>
           </li>
           <li>
             <%=  link_to users_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-users"></i> users
+              <i class="fa-solid fa-users"> users</i>
             <% end %>
           </li>
           <li>
             <%=  link_to books_path ,class: 'nav-link text-light' do %>
-              <i class="fas fa-book-open"></i> books
+              <i class="fa-solid fa-book-open"> books</i>
             <% end %>
           </li>
           <li>
             <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link text-light' do %>
-              <i class="fas fa-sign-out-alt"></i> log out
+             <i class="fa-solid fa-right-to-bracket"> log out</i>
             <% end %>
           </li>
         <% else %>
