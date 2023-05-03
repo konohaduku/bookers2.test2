@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BooksController < ApplicationController
 before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
@@ -19,7 +21,7 @@ before_action :ensure_correct_user, only: [:edit, :update, :destroy]
       redirect_to book_path(@book), notice: "You have created book successfully."
     else
       @books = Book.all
-      render 'index'
+      render "index"
     end
   end
 
@@ -43,7 +45,6 @@ before_action :ensure_correct_user, only: [:edit, :update, :destroy]
   end
 
   private
-
   def book_params
     params.require(:book).permit(:title, :body)
   end
